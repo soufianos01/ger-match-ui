@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, BriefcaseBusiness, Check, ChevronDown, Compass, HeartHandshake, Menu, Search, Sparkles, UsersRound, X } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, Check, ChevronDown, CircleUserRound, Compass, HeartHandshake, Languages, Menu, Search, Sparkles, UsersRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Brand } from "./brand";
 
@@ -35,19 +35,33 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <Brand />
-        <nav className={menuOpen ? "nav open" : "nav"} aria-label="Primary navigation">
-          <a href="#how-it-works">How it works</a>
-          <a href="#opportunities">Opportunities</a>
-          <a href="#for-employers">For employers</a>
-          <a href="#resources">Resources</a>
-        </nav>
-        <div className="header-actions">
-          <a className="login" href="#join">Sign in</a>
-          <a className="button button-small" href="#join">Create profile <ArrowRight size={15} /></a>
-          <button className="menu-button" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" aria-expanded={menuOpen}>
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+        <div className="utility-bar">
+          <div className="utility-inner">
+            <div className="utility-products">
+              <a href="#opportunities">Ausbildungen</a>
+              <a href="#join">For talent</a>
+              <a href="#for-employers">For employers</a>
+            </div>
+            <Brand className="brand-topbar" />
+            <div className="utility-actions">
+              <a className="locale-link" href="#resources"><Languages size={16} /> DE</a>
+              <a className="account-link" href="#join" aria-label="Create your GerMatch profile"><CircleUserRound size={22} /></a>
+              <button className="menu-button" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" aria-expanded={menuOpen}>
+                {menuOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="primary-nav-shell">
+          <div className="primary-nav">
+            <nav className={menuOpen ? "nav open" : "nav"} aria-label="Primary navigation">
+              <a href="#opportunities">Find an Ausbildung <ChevronDown size={14} /></a>
+              <a href="#how-it-works">How it works <ChevronDown size={14} /></a>
+              <a href="#join">For talent <ChevronDown size={14} /></a>
+              <a href="#for-employers">For employers <ChevronDown size={14} /></a>
+              <a href="#resources">Guides <ChevronDown size={14} /></a>
+            </nav>
+          </div>
         </div>
       </header>
 
