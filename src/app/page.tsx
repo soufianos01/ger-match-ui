@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, BriefcaseBusiness, Check, ChevronDown, Compass, HeartHandshake, Menu, Search, Sparkles, UsersRound, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const pathways = [
   { icon: Compass, label: "Explore roles", description: "Find opportunities that fit your skills, goals and location." },
@@ -19,6 +19,17 @@ const benefits = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [role, setRole] = useState("I am looking for opportunities");
+  const [apiStatus, setApiStatus] = useState<"checking" | "ready" | "offline">("checking");
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    void fetch("/api/status", { signal: controller.signal })
+      .then((response) => setApiStatus(response.ok ? "ready" : "offline"))
+      .catch(() => setApiStatus("offline"));
+
+    return () => controller.abort();
+  }, []);
 
   return (
     <main>
@@ -51,6 +62,7 @@ export default function Home() {
             <a className="button" href="#join">Start your profile <ArrowRight size={17} /></a>
             <a className="text-link" href="#how-it-works">See how it works <ArrowRight size={16} /></a>
           </div>
+          <p className={`api-status ${apiStatus}`}><span />{apiStatus === "ready" ? "GerMatch platform online" : apiStatus === "offline" ? "Platform status unavailable" : "Checking platform status"}</p>
           <div className="trust-row">
             <div className="avatars" aria-hidden="true"><i>EA</i><i>MK</i><i>LS</i><i>+</i></div>
             <p><strong>Built for global talent.</strong><br />A clearer path to a career in Germany.</p>
