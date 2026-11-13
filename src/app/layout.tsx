@@ -6,11 +6,11 @@ const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://ger-match-ui.vercel.
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: "GerMatch — Find the right fit in Germany",
-  description: "GerMatch connects international talent with teams and opportunities in Germany.",
+  title: "GerMatch — Find your Ausbildung in Germany",
+  description: "GerMatch connects international talent with Ausbildung providers and paths in Germany.",
   openGraph: {
-    title: "GerMatch — Find the right fit in Germany",
-    description: "A clearer way to discover opportunities and build your future in Germany.",
+    title: "GerMatch — Find your Ausbildung in Germany",
+    description: "A clearer way to discover Ausbildung paths and build your future in Germany.",
     siteName: "GerMatch",
     type: "website",
   },
