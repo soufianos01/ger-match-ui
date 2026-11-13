@@ -60,7 +60,6 @@ export default function Home() {
         <div className="utility-bar">
           <div className="utility-inner">
             <div className="utility-products">
-              <a href="#opportunities">{content.nav.ausbildungen}</a>
               <a href="#join">{content.nav.talent}</a>
               <a href="#for-employers">{content.nav.providers}</a>
             </div>
