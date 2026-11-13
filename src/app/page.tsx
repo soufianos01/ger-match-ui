@@ -90,8 +90,8 @@ export default function Home() {
             <div className="profile-line"><span>Profile match</span><strong>94%</strong></div>
             <div className="progress"><span /></div>
           </div>
-          <div className="match-card"><div className="match-icon"><HeartHandshake size={22} /></div><div><span>New Ausbildung match</span><strong>Pflegefachfrau · Berlin</strong></div><Check size={19} /></div>
-          <div className="role-card"><span className="role-dot" /><div><small>Suggested Ausbildung</small><strong>Pflegefachmann</strong></div><ArrowRight size={18} /></div>
+          <div className="match-card"><div className="match-icon"><HeartHandshake size={22} /></div><div><span>New Ausbildung match</span><strong>Erzieher/in · Hamburg</strong></div><Check size={19} /></div>
+          <div className="role-card"><span className="role-dot" /><div><small>Suggested Ausbildung</small><strong>Elektroniker/in</strong></div><ArrowRight size={18} /></div>
         </div>
       </section>
 
@@ -110,7 +110,7 @@ export default function Home() {
 
       <section id="opportunities" className="section opportunity-section">
         <div className="opportunity-content"><p className="eyebrow"><Search size={15} /> Made for real paths</p><h2>Matching that sees the whole you.</h2><p>Your strengths matter. So do your language journey, goals, preferred setting and the kind of Ausbildung where you will do your best work.</p><ul>{benefits.map((benefit) => <li key={benefit}><span><Check size={14} /></span>{benefit}</li>)}</ul><a className="button button-dark" href="#join">Explore Ausbildungen <ArrowRight size={17} /></a></div>
-        <div className="opportunity-board" aria-hidden="true"><div className="board-header"><span>Recommended Ausbildungen</span><span className="live-dot">Updated today</span></div><div className="job-row featured"><span className="company-mark coral">P</span><div><strong>Pflegefachfrau / Pflegefachmann</strong><small>Städtisches Klinikum · Berlin · 3-year Ausbildung</small></div><span className="score">96% fit</span></div><div className="job-row"><span className="company-mark navy">M</span><div><strong>Mechatroniker/in</strong><small>Rheinwerk · München · Duale Ausbildung</small></div><ArrowRight size={17} /></div><div className="job-row"><span className="company-mark mint">F</span><div><strong>Fachinformatiker/in</strong><small>Nordstern · Hamburg · Duale Ausbildung</small></div><ArrowRight size={17} /></div><div className="board-footer">Showing Ausbildungen aligned with your profile <ArrowRight size={16} /></div></div>
+        <div className="opportunity-board" aria-hidden="true"><div className="board-header"><span>Recommended Ausbildungen</span><span className="live-dot">Updated today</span></div><div className="job-row featured"><span className="company-mark coral">P</span><div><strong>Pflegefachfrau / Pflegefachmann</strong><small>Städtisches Klinikum · Berlin · 3-year Ausbildung</small></div><span className="score">96% fit</span></div><div className="job-row"><span className="company-mark navy">E</span><div><strong>Erzieher/in</strong><small>KinderCampus · Hamburg · Staatliche Ausbildung</small></div><ArrowRight size={17} /></div><div className="job-row"><span className="company-mark mint">F</span><div><strong>Fachinformatiker/in</strong><small>Nordstern · Köln · Duale Ausbildung</small></div><ArrowRight size={17} /></div><div className="board-footer">Showing Ausbildungen aligned with your profile <ArrowRight size={16} /></div></div>
       </section>
 
       <section id="for-employers" className="employer-banner"><div><p className="eyebrow">For Ausbildung providers</p><h2>Meet motivated talent ready to learn.</h2><p>Make your Ausbildung places visible to people ready to grow with your organisation.</p></div><a className="button button-inverse" href="#resources">For providers <ArrowRight size={17} /></a></section>
