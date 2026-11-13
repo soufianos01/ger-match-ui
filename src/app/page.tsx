@@ -2,6 +2,7 @@
 
 import { ArrowRight, BriefcaseBusiness, Check, ChevronDown, Compass, HeartHandshake, Menu, Search, Sparkles, UsersRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Brand } from "./brand";
 
 const pathways = [
   { icon: Compass, label: "Explore roles", description: "Find opportunities that fit your skills, goals and location." },
@@ -34,10 +35,7 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="GerMatch home">
-          <span className="brand-mark"><span>G</span><span>M</span></span>
-          <span>GerMatch</span>
-        </a>
+        <Brand />
         <nav className={menuOpen ? "nav open" : "nav"} aria-label="Primary navigation">
           <a href="#how-it-works">How it works</a>
           <a href="#opportunities">Opportunities</a>
@@ -103,7 +101,7 @@ export default function Home() {
 
       <section id="for-employers" className="employer-banner"><div><p className="eyebrow">For employers</p><h2>Meet talent ready to build what’s next.</h2><p>Turn hiring into a mutual match with a richer picture of every candidate.</p></div><a className="button button-inverse" href="#resources">For employers <ArrowRight size={17} /></a></section>
 
-      <footer id="resources"><a className="brand" href="#top"><span className="brand-mark"><span>G</span><span>M</span></span><span>GerMatch</span></a><p>Helping people and teams find their right fit in Germany.</p><div className="footer-links"><a href="#top">Privacy</a><a href="#top">Terms</a><a href="#top">Contact</a></div><small>© 2026 GerMatch. All rights reserved.</small></footer>
+      <footer id="resources"><Brand /><p>Helping people and teams find their right fit in Germany.</p><div className="footer-links"><a href="#top">Privacy</a><a href="#top">Terms</a><a href="#top">Contact</a></div><small>© 2026 GerMatch. All rights reserved.</small></footer>
     </main>
   );
 }
