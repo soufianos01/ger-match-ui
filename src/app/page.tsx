@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowRight, BriefcaseBusiness, Check, ChevronDown, CircleUserRound, Compass, HeartHandshake, Languages, Menu, Search, Sparkles, UsersRound, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowRight, BriefcaseBusiness, Check, ChevronDown, Compass, HeartHandshake, Languages, MapPin, Menu, Search, UsersRound, X } from "lucide-react";
+import { FormEvent, useEffect, useState } from "react";
 import { Brand } from "./brand";
 
 type Language = "en" | "de";
@@ -9,8 +9,8 @@ type FinderChoice = "talent" | "provider" | "exploring";
 
 const translations = {
   en: {
-    nav: { ausbildungen: "Ausbildungen", talent: "For talent", providers: "For providers", find: "Find an Ausbildung", how: "How it works", guides: "Guides" },
-    hero: { eyebrow: "Ausbildung matching for Germany", title: "Find the Ausbildung that feels like the right", highlight: "match.", lead: "GerMatch connects your strengths with Ausbildung providers in Germany who are ready to help you build your next chapter.", start: "Start your profile", how: "See how it works", trust: "Built for international talent.", trustSub: "A clearer path into Ausbildung in Germany.", profile: "Profile match", status: "Ready to start", matchLabel: "New Ausbildung match", match: "Erzieher/in · Hamburg", suggested: "Suggested Ausbildung", suggestedRole: "Elektroniker/in", tags: ["Patient care", "Teamwork", "German B2"] },
+    nav: { ausbildungen: "Ausbildungen", talent: "For talent", providers: "For providers", find: "Find an Ausbildung", how: "How it works", guides: "Guides", register: "Create account", login: "Sign in" },
+    hero: { eyebrow: "Ausbildung matching for Germany", title: "Find the Ausbildung that feels like the right", highlight: "match.", lead: "GerMatch connects your strengths with Ausbildung providers in Germany who are ready to help you build your next chapter.", start: "Start your profile", how: "See how it works", trust: "Built for international talent.", trustSub: "A clearer path into Ausbildung in Germany.", profile: "Profile match", status: "Ready to start", matchLabel: "New Ausbildung match", match: "Erzieher/in · Hamburg", suggested: "Suggested Ausbildung", suggestedRole: "Elektroniker/in", tags: ["Patient care", "Teamwork", "German B2"], searchLabel: "What interests you?", locationLabel: "Where?", searchPlaceholder: "e.g. Nursing, IT, electrician", locationPlaceholder: "City or region", searchButton: "Find Ausbildungen", popular: "Popular searches", popularSearches: ["Pflege", "IT", "Hospitality"] },
     finder: { eyebrow: "Start where you are", title: "What kind of Ausbildung are you looking for?", label: "I’m here because…", options: { talent: "I am looking for an Ausbildung", provider: "I represent an Ausbildung provider", exploring: "I am exploring Ausbildung in Germany" }, continue: "Continue" },
     pathway: { eyebrow: "Your next chapter", title: "A better way into Ausbildung.", intro: "Less noise, more signal. GerMatch helps you move from possibilities to the Ausbildung paths that truly fit.", items: [{ label: "Explore Ausbildungen", description: "Find Ausbildung paths that fit your strengths, goals and location." }, { label: "Meet providers", description: "Get discovered by organisations ready to train international talent." }, { label: "Start your Ausbildung", description: "Move from a good match to a confident first day." }] },
     opportunity: { eyebrow: "Made for real paths", title: "Matching that sees the whole you.", intro: "Your strengths matter. So do your language journey, goals, preferred setting and the kind of Ausbildung where you will do your best work.", benefits: ["A profile built around skills, language and goals", "Matches to real Ausbildung programs", "Relevant paths, not endless scrolling", "Guidance for your move and Ausbildung in Germany"], button: "Explore Ausbildungen", board: "Recommended Ausbildungen", updated: "Updated today", score: "96% fit", footer: "Showing Ausbildungen aligned with your profile", roles: [{ title: "Pflegefachfrau / Pflegefachmann", meta: "Städtisches Klinikum · Berlin · 3-year Ausbildung", mark: "P" }, { title: "Erzieher/in", meta: "KinderCampus · Hamburg · State-recognised training", mark: "E" }, { title: "Fachinformatiker/in", meta: "Nordstern · Cologne · Duale Ausbildung", mark: "F" }] },
@@ -20,8 +20,8 @@ const translations = {
     locale: "DE",
   },
   de: {
-    nav: { ausbildungen: "Ausbildungen", talent: "Für Talente", providers: "Für Anbieter", find: "Ausbildung finden", how: "So funktioniert’s", guides: "Ratgeber" },
-    hero: { eyebrow: "Ausbildungs-Matching in Deutschland", title: "Finde die Ausbildung, die wirklich zu dir", highlight: "passt.", lead: "GerMatch verbindet deine Stärken mit Ausbildungsbetrieben in Deutschland, die dich auf deinem nächsten Schritt begleiten.", start: "Profil erstellen", how: "So funktioniert’s", trust: "Für internationale Talente gemacht.", trustSub: "Dein Weg zur Ausbildung in Deutschland.", profile: "Profil-Match", status: "Bereit zu starten", matchLabel: "Neue Ausbildungs-Möglichkeit", match: "Erzieher/in · Hamburg", suggested: "Vorgeschlagene Ausbildung", suggestedRole: "Elektroniker/in", tags: ["Pflege", "Teamarbeit", "Deutsch B2"] },
+    nav: { ausbildungen: "Ausbildungen", talent: "Für Talente", providers: "Für Anbieter", find: "Ausbildung finden", how: "So funktioniert’s", guides: "Ratgeber", register: "Registrieren", login: "Anmelden" },
+    hero: { eyebrow: "Ausbildungs-Matching in Deutschland", title: "Finde die Ausbildung, die wirklich zu dir", highlight: "passt.", lead: "GerMatch verbindet deine Stärken mit Ausbildungsbetrieben in Deutschland, die dich auf deinem nächsten Schritt begleiten.", start: "Profil erstellen", how: "So funktioniert’s", trust: "Für internationale Talente gemacht.", trustSub: "Dein Weg zur Ausbildung in Deutschland.", profile: "Profil-Match", status: "Bereit zu starten", matchLabel: "Neue Ausbildungs-Möglichkeit", match: "Erzieher/in · Hamburg", suggested: "Vorgeschlagene Ausbildung", suggestedRole: "Elektroniker/in", tags: ["Pflege", "Teamarbeit", "Deutsch B2"], searchLabel: "Was interessiert dich?", locationLabel: "Wo?", searchPlaceholder: "z. B. Pflege, IT, Elektronik", locationPlaceholder: "Ort oder Region", searchButton: "Ausbildungen finden", popular: "Beliebte Suchen", popularSearches: ["Pflege", "IT", "Gastronomie"] },
     finder: { eyebrow: "Starte, wo du bist", title: "Welche Ausbildung suchst du?", label: "Ich bin hier, weil…", options: { talent: "Ich suche eine Ausbildung", provider: "Ich vertrete einen Ausbildungsbetrieb", exploring: "Ich erkunde Ausbildungen in Deutschland" }, continue: "Weiter" },
     pathway: { eyebrow: "Dein nächstes Kapitel", title: "Der bessere Weg in die Ausbildung.", intro: "Weniger Rauschen, mehr Orientierung. GerMatch bringt dich zu Ausbildungswegen, die wirklich zu dir passen.", items: [{ label: "Ausbildungen entdecken", description: "Finde Wege, die zu deinen Stärken, Zielen und deinem Wunschort passen." }, { label: "Anbieter kennenlernen", description: "Werde von Organisationen entdeckt, die internationale Talente ausbilden möchten." }, { label: "Ausbildung starten", description: "Vom passenden Match sicher zum ersten Ausbildungstag." }] },
     opportunity: { eyebrow: "Für echte Wege", title: "Matching, das dich ganzheitlich sieht.", intro: "Deine Stärken zählen. Ebenso deine Sprache, deine Ziele, dein Wunschumfeld und die Ausbildung, in der du dein Bestes geben kannst.", benefits: ["Ein Profil für Stärken, Sprache und Ziele", "Passende Ausbildungsplätze", "Relevante Wege statt endloser Suche", "Begleitung für Umzug und Ausbildung in Deutschland"], button: "Ausbildungen entdecken", board: "Empfohlene Ausbildungen", updated: "Heute aktualisiert", score: "96 % passend", footer: "Ausbildungen passend zu deinem Profil", roles: [{ title: "Pflegefachfrau / Pflegefachmann", meta: "Städtisches Klinikum · Berlin · 3-jährige Ausbildung", mark: "P" }, { title: "Erzieher/in", meta: "KinderCampus · Hamburg · Staatliche Ausbildung", mark: "E" }, { title: "Fachinformatiker/in", meta: "Nordstern · Köln · Duale Ausbildung", mark: "F" }] },
@@ -36,23 +36,23 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState<Language>("en");
   const [role, setRole] = useState<FinderChoice>("talent");
-  const [apiStatus, setApiStatus] = useState<"checking" | "ready" | "offline">("checking");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchLocation, setSearchLocation] = useState("");
   const content = translations[language];
+  const registerHref = role === "provider" ? "/auth/register?role=provider" : "/auth/register?role=talent";
 
   useEffect(() => {
     document.documentElement.lang = language;
     document.title = language === "de" ? "GerMatch — Finde deine Ausbildung in Deutschland" : "GerMatch — Find your Ausbildung in Germany";
   }, [language]);
 
-  useEffect(() => {
-    const controller = new AbortController();
-
-    void fetch("/api/status", { signal: controller.signal })
-      .then((response) => setApiStatus(response.ok ? "ready" : "offline"))
-      .catch(() => setApiStatus("offline"));
-
-    return () => controller.abort();
-  }, []);
+  function searchAusbildungen(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const params = new URLSearchParams({ role: "talent" });
+    if (searchTerm.trim()) params.set("query", searchTerm.trim());
+    if (searchLocation.trim()) params.set("location", searchLocation.trim());
+    window.location.assign(`/auth/register?${params.toString()}`);
+  }
 
   return (
     <main>
@@ -66,7 +66,10 @@ export default function Home() {
             <Brand className="brand-topbar" />
             <div className="utility-actions">
               <button className="locale-link" type="button" onClick={() => setLanguage(language === "en" ? "de" : "en")} aria-label={language === "en" ? "Auf Deutsch wechseln" : "Switch to English"}><Languages size={16} /> {content.locale}</button>
-              <a className="account-link" href="#join" aria-label={language === "de" ? "GerMatch-Profil erstellen" : "Create your GerMatch profile"}><CircleUserRound size={22} /></a>
+              <div className="auth-actions">
+                <a className="auth-register" href={registerHref}>{content.nav.register}</a>
+                <a className="auth-login" href="/auth/login">{content.nav.login}</a>
+              </div>
               <button className="menu-button" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" aria-expanded={menuOpen}>
                 {menuOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
@@ -81,6 +84,7 @@ export default function Home() {
               <a href="#join">{content.nav.talent} <ChevronDown size={14} /></a>
               <a href="#for-employers">{content.nav.providers} <ChevronDown size={14} /></a>
               <a href="#resources">{content.nav.guides} <ChevronDown size={14} /></a>
+              <span className="mobile-auth-actions"><a href={registerHref}>{content.nav.register}</a><a href="/auth/login">{content.nav.login}</a></span>
             </nav>
           </div>
         </div>
@@ -88,14 +92,7 @@ export default function Home() {
 
       <section id="top" className="hero">
         <div className="hero-copy">
-          <p className="eyebrow"><Sparkles size={15} /> {content.hero.eyebrow}</p>
           <h1>{content.hero.title} <em>{content.hero.highlight}</em></h1>
-          <p className="hero-lead">{content.hero.lead}</p>
-          <div className="hero-actions">
-            <a className="button" href="#join">{content.hero.start} <ArrowRight size={17} /></a>
-            <a className="text-link" href="#how-it-works">{content.hero.how} <ArrowRight size={16} /></a>
-          </div>
-          <p className={`api-status ${apiStatus}`}><span />{content.status[apiStatus]}</p>
           <div className="trust-row">
             <div className="avatars" aria-hidden="true"><i>EA</i><i>MK</i><i>LS</i><i>+</i></div>
             <p><strong>{content.hero.trust}</strong><br />{content.hero.trustSub}</p>
@@ -114,27 +111,41 @@ export default function Home() {
           <div className="match-card"><div className="match-icon"><HeartHandshake size={22} /></div><div><span>{content.hero.matchLabel}</span><strong>{content.hero.match}</strong></div><Check size={19} /></div>
           <div className="role-card"><span className="role-dot" /><div><small>{content.hero.suggested}</small><strong>{content.hero.suggestedRole}</strong></div><ArrowRight size={18} /></div>
         </div>
+        <div className="hero-search-panel">
+          <form className="hero-search" onSubmit={searchAusbildungen} role="search">
+            <label className="hero-search-field">
+              <span>{content.hero.searchLabel}</span>
+              <span className="hero-search-input"><Search size={20} aria-hidden="true" /><input value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder={content.hero.searchPlaceholder} autoComplete="off" /></span>
+            </label>
+            <label className="hero-search-field">
+              <span>{content.hero.locationLabel}</span>
+              <span className="hero-search-input"><MapPin size={20} aria-hidden="true" /><input value={searchLocation} onChange={(event) => setSearchLocation(event.target.value)} placeholder={content.hero.locationPlaceholder} autoComplete="address-level2" /></span>
+            </label>
+            <button className="hero-search-submit" type="submit">{content.hero.searchButton} <ArrowRight size={18} /></button>
+          </form>
+          <div className="hero-search-suggestions"><span>{content.hero.popular}:</span>{content.hero.popularSearches.map((suggestion) => <button key={suggestion} type="button" onClick={() => setSearchTerm(suggestion)}>{suggestion}</button>)}</div>
+        </div>
       </section>
 
       <section id="join" className="finder-shell">
         <div className="finder-heading"><span className="step-number">01</span><div><p className="eyebrow">{content.finder.eyebrow}</p><h2>{content.finder.title}</h2></div></div>
         <div className="finder-controls">
           <label className="select-control"><span>{content.finder.label}</span><select value={role} onChange={(event) => setRole(event.target.value as FinderChoice)}><option value="talent">{content.finder.options.talent}</option><option value="provider">{content.finder.options.provider}</option><option value="exploring">{content.finder.options.exploring}</option></select><ChevronDown size={18} /></label>
-          <a className="button" href="#how-it-works">{content.finder.continue} <ArrowRight size={17} /></a>
+          <a className="button" href={registerHref}>{content.finder.continue} <ArrowRight size={17} /></a>
         </div>
       </section>
 
       <section id="how-it-works" className="section pathway-section">
         <div className="section-intro"><p className="eyebrow">{content.pathway.eyebrow}</p><h2>{content.pathway.title}</h2><p>{content.pathway.intro}</p></div>
-        <div className="pathways">{content.pathway.items.map(({ label, description }, index) => { const Icon = [Compass, UsersRound, BriefcaseBusiness][index]; return <article className="pathway" key={label}><span className="pathway-number">0{index + 1}</span><div className="pathway-icon"><Icon size={24} /></div><h3>{label}</h3><p>{description}</p><a href="#join" aria-label={`${language === "de" ? "Mehr über" : "Learn about"} ${label}`}>{language === "de" ? "Entdecken" : "Explore"} <ArrowRight size={16} /></a></article>; })}</div>
+        <div className="pathways">{content.pathway.items.map(({ label, description }, index) => { const Icon = [Compass, UsersRound, BriefcaseBusiness][index]; const href = index === 1 ? "/auth/register?role=provider" : "/auth/register?role=talent"; return <article className="pathway" key={label}><span className="pathway-number">0{index + 1}</span><div className="pathway-icon"><Icon size={24} /></div><h3>{label}</h3><p>{description}</p><a href={href} aria-label={`${language === "de" ? "Mehr über" : "Learn about"} ${label}`}>{language === "de" ? "Entdecken" : "Explore"} <ArrowRight size={16} /></a></article>; })}</div>
       </section>
 
       <section id="opportunities" className="section opportunity-section">
-        <div className="opportunity-content"><p className="eyebrow"><Search size={15} /> {content.opportunity.eyebrow}</p><h2>{content.opportunity.title}</h2><p>{content.opportunity.intro}</p><ul>{content.opportunity.benefits.map((benefit) => <li key={benefit}><span><Check size={14} /></span>{benefit}</li>)}</ul><a className="button button-dark" href="#join">{content.opportunity.button} <ArrowRight size={17} /></a></div>
+        <div className="opportunity-content"><p className="eyebrow"><Search size={15} /> {content.opportunity.eyebrow}</p><h2>{content.opportunity.title}</h2><p>{content.opportunity.intro}</p><ul>{content.opportunity.benefits.map((benefit) => <li key={benefit}><span><Check size={14} /></span>{benefit}</li>)}</ul><a className="button button-dark" href="/auth/register?role=talent">{content.opportunity.button} <ArrowRight size={17} /></a></div>
         <div className="opportunity-board" aria-hidden="true"><div className="board-header"><span>{content.opportunity.board}</span><span className="live-dot">{content.opportunity.updated}</span></div>{content.opportunity.roles.map((job, index) => <div className={`job-row${index === 0 ? " featured" : ""}`} key={job.title}><span className={`company-mark ${index === 0 ? "coral" : index === 1 ? "navy" : "mint"}`}>{job.mark}</span><div><strong>{job.title}</strong><small>{job.meta}</small></div>{index === 0 ? <span className="score">{content.opportunity.score}</span> : <ArrowRight size={17} />}</div>)}<div className="board-footer">{content.opportunity.footer} <ArrowRight size={16} /></div></div>
       </section>
 
-      <section id="for-employers" className="employer-banner"><div><p className="eyebrow">{content.providers.eyebrow}</p><h2>{content.providers.title}</h2><p>{content.providers.intro}</p></div><a className="button button-inverse" href="#resources">{content.providers.button} <ArrowRight size={17} /></a></section>
+      <section id="for-employers" className="employer-banner"><div><p className="eyebrow">{content.providers.eyebrow}</p><h2>{content.providers.title}</h2><p>{content.providers.intro}</p></div><a className="button button-inverse" href="/auth/register?role=provider">{content.providers.button} <ArrowRight size={17} /></a></section>
 
       <footer id="resources"><Brand /><p>{content.footer}</p><div className="footer-links"><a href="#top">{language === "de" ? "Datenschutz" : "Privacy"}</a><a href="#top">{language === "de" ? "Impressum" : "Terms"}</a><a href="#top">{language === "de" ? "Kontakt" : "Contact"}</a></div><small>© 2026 GerMatch. All rights reserved.</small></footer>
     </main>
